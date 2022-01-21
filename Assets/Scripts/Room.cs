@@ -12,14 +12,6 @@ public class Room : MonoBehaviour
 
     bool[] doors = new bool[4];
 
-    private void Start()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            Debug.Log(GenerateSeed(i));
-        }
-    }
-
     // Generate a new seed taking the door that the room is being entered from
     public static int GenerateSeed(int fromDoorIndex)
     {
