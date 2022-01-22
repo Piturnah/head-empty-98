@@ -4,6 +4,8 @@ using Random = System.Random;
 
 public class Room
 {
+    Random rand;
+
     // Last byte used for room info
     public int seed;
 
@@ -12,6 +14,8 @@ public class Room
     public bool completed;
 
     public bool[] doors = new bool[4];
+
+    public int roomType;
 
     // Generate a new seed taking the door that the room is being entered from
     public static int GenerateChildSeed(int seed, int fromDoorIndex)
@@ -44,6 +48,8 @@ public class Room
 
         fromRoomInfo = Controller.GetFromInfo(this.seed);
         completed = Controller.IsRoomComplete(this.seed);
+        rand = new Random(seed);
+        roomType = rand.Next();
     }
 }
 
@@ -81,7 +87,14 @@ public class RoomObj : MonoBehaviour
 
     public void setRoomObj(Room room)
     {
+        assets = FindObjectOfType<Assets>();
         this.room = room;
+
+        foreach (Transform wall in transform.Find("Walls").transform)
+        {
+            wall.GetComponent<MeshFilter>().mesh = assets.roomTypes[room.roomType % assets.roomTypes.Length].wallMesh;
+            wall.GetComponent<MeshRenderer>().materials = assets.roomTypes[room.roomType % assets.roomTypes.Length].wallMaterials;
+        }
     }
     public Room getRoom()
     {
