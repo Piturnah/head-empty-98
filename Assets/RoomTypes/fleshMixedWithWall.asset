@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634a10ff88663f64baeae54500c526f8, type: 3}
+  m_Name: fleshMixedWithWall
+  m_EditorClassIdentifier: 
+  wallMesh: {fileID: 2318816681869651526, guid: 385a587208f423f45b0b7860e1b9cdab, type: 3}
+  wallMaterials:
+  - {fileID: 2100000, guid: ccfeb5211014af449a6e50bdc69d763b, type: 2}
+  - {fileID: 2100000, guid: efff02ce4d1d0924d96dd177b8db81d1, type: 2}

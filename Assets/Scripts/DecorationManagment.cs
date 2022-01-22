@@ -36,14 +36,14 @@ public class DecorationManagment : MonoBehaviour
 
     public static void LoadJSON(string nameOfObject, MeshRenderer rendererToOverride, MeshFilter filterToOverride)
     {
-        string txt = ((TextAsset)Resources.Load($"SavedDecorations/SavedMeshRenderers/{nameOfObject}.txt")).text;
+        string txt = ((TextAsset)Resources.Load($"SavedDecorations/SavedMeshFilters/{nameOfObject}.txt")).text;
         EditorJsonUtility.FromJsonOverwrite(txt, rendererToOverride);
 
         txt = ((TextAsset)Resources.Load($"SavedDecorations/SavedMeshFilters/{nameOfObject}.txt")).text;
         EditorJsonUtility.FromJsonOverwrite(txt, filterToOverride);
     }
 
-    [MenuItem("Asset Managment/Save MeshRenderer")]
+    //[MenuItem("Asset Managment/Save MeshRenderer")]
     public static void SaveJSONEditor()
     {
         GameObject gameObject = Selection.activeGameObject;

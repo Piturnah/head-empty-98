@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634a10ff88663f64baeae54500c526f8, type: 3}
+  m_Name: fleshMixedWithPillar
+  m_EditorClassIdentifier: 
+  wallMesh: {fileID: 7745574486421046376, guid: f9ca817ac1a8c1d46965d97b4f209815, type: 3}
+  wallMaterials:
+  - {fileID: 2100000, guid: 6963f90429323f942b5a1251d0dea00a, type: 2}
+  - {fileID: 2100000, guid: e4f0ef260c79b284e8ea50af5c5fad0b, type: 2}
