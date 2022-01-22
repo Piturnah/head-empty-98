@@ -4,7 +4,7 @@ using Random = System.Random;
 
 public class Room
 {
-    Random rand;
+    public Random rand;
 
     // Last byte used for room info
     public int seed;
@@ -92,8 +92,9 @@ public class RoomObj : MonoBehaviour
 
         foreach (Transform wall in transform.Find("Walls").transform)
         {
-            wall.GetComponent<MeshFilter>().mesh = assets.roomTypes[room.roomType % assets.roomTypes.Length].wallMesh;
-            wall.GetComponent<MeshRenderer>().materials = assets.roomTypes[room.roomType % assets.roomTypes.Length].wallMaterials;
+            int wallType = room.rand.Next() % assets.roomTypes.Length;
+            wall.GetComponent<MeshFilter>().mesh = assets.roomTypes[wallType].wallMesh;
+            wall.GetComponent<MeshRenderer>().materials = assets.roomTypes[wallType].wallMaterials;
         }
     }
     public Room getRoom()
