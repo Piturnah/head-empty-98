@@ -8,6 +8,6 @@ public class Assets : MonoBehaviour
     public GameObject[] roomObjectPrefabs;
     public GameObject doorPrefab;
     public GameObject roomPrefab;
-
+    public GameObject[] roomObstacles;
     public RoomType[] roomTypes;
 }

@@ -60,6 +60,7 @@ public class RoomObj : MonoBehaviour
     Room room;
 
     const float roomWidth = 20.58705f;
+    const int maxRoomObstacles = 6;
 
     private void Start()
     {
@@ -95,6 +96,18 @@ public class RoomObj : MonoBehaviour
             int wallType = room.rand.Next() % assets.roomTypes.Length;
             wall.GetComponent<MeshFilter>().mesh = assets.roomTypes[wallType].wallMesh;
             wall.GetComponent<MeshRenderer>().materials = assets.roomTypes[wallType].wallMaterials;
+        }
+
+        int max = room.rand.Next(0, maxRoomObstacles);
+        for (int i = 0; i < max; i++)
+        {
+            Vector3 offsetDir = new Vector3((float)(room.rand.NextDouble() - .5f) * 2, 0, (float)(room.rand.NextDouble() - .5f) * 2).normalized;
+            Vector3 attemptPos = transform.position + offsetDir * (float)room.rand.NextDouble() * roomWidth;
+            while (Physics.CheckSphere(attemptPos, .8f))
+            {
+                attemptPos = transform.position + offsetDir * (float)room.rand.NextDouble() * roomWidth;
+            }
+            GameObject newObstacle = Instantiate(assets.roomObstacles[room.rand.Next() % assets.roomObstacles.Length], attemptPos, Quaternion.Euler(Vector3.up * 45), transform);
         }
     }
     public Room getRoom()
