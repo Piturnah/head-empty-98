@@ -6,19 +6,23 @@ public class PlayerManagement : MonoBehaviour
 {
     Rigidbody rb;
     Transform model;
-    public int movementSpeed;
-    Animator anim;
+    int runSpeed = 12;
+    int aimSpeed = 9;
+    int movementSpeed;
+    Animator tanukiAnim;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        model = transform.Find("model");
-        anim = model.GetComponent<Animator>();
+        model = transform.Find("models");
+        tanukiAnim = model.Find("model").GetComponent<Animator>();
     }
 
     void Move()
     {
         Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        tanukiAnim.SetFloat("horizontal", dir.x);
+        tanukiAnim.SetFloat("vertical", dir.z);
         if (!Input.GetKey(KeyCode.Mouse1))
         {
             float lookAngle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
@@ -34,6 +38,8 @@ public class PlayerManagement : MonoBehaviour
 
     private void Update()
     {
-        anim.SetBool("running", rb.velocity.magnitude != 0);
+        movementSpeed = (Input.GetKey(KeyCode.Mouse1) ? aimSpeed : runSpeed);
+        tanukiAnim.SetFloat("velocity", rb.velocity.magnitude);
+        tanukiAnim.SetBool("aiming", Input.GetKey(KeyCode.Mouse1));
     }
 }
