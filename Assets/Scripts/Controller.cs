@@ -16,9 +16,7 @@ public class Controller : MonoBehaviour
     {
         Random r = new Random();
         int initialBeforeSeed = r.Next() | 1;
-        Debug.Log(string.Format("Initial before seed: {0}", initialBeforeSeed));
         int initialSeed = Room.GenerateChildSeed(initialBeforeSeed, 0);
-        Debug.Log(string.Format("Initial seed: {0}", initialSeed));
         VisitedRoom(initialBeforeSeed, 2, initialSeed);
         VisitedRoom(initialSeed, 0, initialBeforeSeed);
 
