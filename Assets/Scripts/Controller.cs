@@ -23,6 +23,8 @@ public class Controller : MonoBehaviour
         assets = FindObjectOfType<Assets>();
         RoomObj newRoom = Instantiate(assets.roomPrefab).GetComponent<RoomObj>();
         newRoom.setRoomObj(new Room(initialSeed, initialBeforeSeed, 2));
+
+        levelIsOver = false;
     }
 
     public static int[] GetFromInfo(int seed)
@@ -43,5 +45,19 @@ public class Controller : MonoBehaviour
     public static bool IsRoomComplete(int seed)
     {
         return roomComplete.TryGetValue(seed, out bool value);
+    }
+
+    // Game Managment
+    public static bool levelIsOver;
+
+    public static void GameLost()
+    {
+        GameFinished();
+        Application.Quit();
+    }
+
+    static void GameFinished()
+    {
+        levelIsOver = false;
     }
 }

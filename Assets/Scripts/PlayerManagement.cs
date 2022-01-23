@@ -9,11 +9,15 @@ public class PlayerManagement : MonoBehaviour
     public int movementSpeed;
     Animator anim;
 
+    public int maxHealth = 3;
+    int currentHealth;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         model = transform.Find("model");
         anim = model.GetComponent<Animator>();
+        currentHealth = maxHealth;
     }
 
     void Move()
@@ -27,6 +31,11 @@ public class PlayerManagement : MonoBehaviour
         rb.velocity = dir * movementSpeed;
     }
 
+    public void TakeDamage()
+    {
+        currentHealth -= 1;
+    }
+
     private void FixedUpdate()
     {
         Move();
@@ -35,5 +44,9 @@ public class PlayerManagement : MonoBehaviour
     private void Update()
     {
         anim.SetBool("running", rb.velocity.magnitude != 0);
+        if(currentHealth <= 0)
+        {
+            Controller.GameLost();
+        }
     }
 }
