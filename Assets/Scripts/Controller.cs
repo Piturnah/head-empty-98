@@ -19,8 +19,8 @@ public class Controller : MonoBehaviour
         Debug.Log(string.Format("Initial before seed: {0}", initialBeforeSeed));
         int initialSeed = Room.GenerateChildSeed(initialBeforeSeed, 0);
         Debug.Log(string.Format("Initial seed: {0}", initialSeed));
-        VisitedRoom(initialBeforeSeed, 0, initialSeed);
-        VisitedRoom(initialSeed, 2, initialSeed);
+        VisitedRoom(initialBeforeSeed, 2, initialSeed);
+        VisitedRoom(initialSeed, 0, initialBeforeSeed);
 
         assets = FindObjectOfType<Assets>();
         RoomObj newRoom = Instantiate(assets.roomPrefab).GetComponent<RoomObj>();
