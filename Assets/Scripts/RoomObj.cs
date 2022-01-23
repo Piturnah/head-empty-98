@@ -61,6 +61,7 @@ public class RoomObj : MonoBehaviour
 
     const float roomWidth = 20.58705f;
     const int maxRoomObstacles = 6;
+    const int maxRoomMonsters = 6;
 
     private void Start()
     {
@@ -108,6 +109,19 @@ public class RoomObj : MonoBehaviour
                 attemptPos = transform.position + offsetDir * (float)room.rand.NextDouble() * roomWidth;
             }
             GameObject newObstacle = Instantiate(assets.roomObstacles[room.rand.Next() % assets.roomObstacles.Length], attemptPos, Quaternion.Euler(Vector3.up * 45), transform);
+        }
+
+        max = room.rand.Next(0, maxRoomMonsters);
+        for (int i = 0; i < max; i++)
+        {
+            Vector3 offsetDir = new Vector3((float)(room.rand.NextDouble() - .5f) * 2, 0, (float)(room.rand.NextDouble() - .5f) * 2).normalized;
+            Vector3 attemptPos = transform.position + offsetDir * (float)room.rand.NextDouble() * roomWidth;
+            while (Physics.CheckSphere(attemptPos, .8f))
+            {
+                attemptPos = transform.position + offsetDir * (float)room.rand.NextDouble() * roomWidth;
+            }
+            GameObject newMonster = Instantiate(assets.monsterPrefab, attemptPos, Quaternion.Euler(Vector3.up * 45), transform);
+            newMonster.transform.Find("model").Find("Cylinder").GetComponent<SkinnedMeshRenderer>().material.mainTexture = assets.monsterColours[room.rand.Next() % assets.monsterColours.Length];
         }
     }
     public Room getRoom()
