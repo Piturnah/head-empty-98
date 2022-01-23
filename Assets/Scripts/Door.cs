@@ -11,6 +11,8 @@ public class Door : MonoBehaviour
     float timeTilDoorsOpen = .5f;
     float instantiatedTime;
 
+    public Animator anim;
+
     public Material openedMat;
 
     private void Start()
@@ -33,7 +35,7 @@ public class Door : MonoBehaviour
             if (Time.time - instantiatedTime >= timeTilDoorsOpen)
             {
                 opened = true;
-                gameObject.GetComponent<MeshRenderer>().material = openedMat;
+                anim.SetTrigger("open");
             }
         }
     }
