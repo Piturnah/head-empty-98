@@ -1,23 +1,20 @@
 fileFormatVersion: 2
-guid: 137fc4ebedf6a264d9f96d252cd49c95
+guid: 769bc63c8787482428509390ac1218e3
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
-      74: -3999578356269874737
-    second: Cube|CubeAction
+      74: -2888455497354957438
+    second: Armature|gremlin_explode
   - first:
-      74: -7918129362319027497
-    second: Cube|CubeAction.001
+      74: -3463413903794653133
+    second: Armature|gremlin_headbutt
   - first:
-      74: 17017395923089283
-    second: Cube.001|CubeAction
+      74: 22606500397042168
+    second: Armature|gremlin_run
   - first:
-      74: 7693504525942378453
-    second: Cube.001|CubeAction.001
-  - first:
-      74: -1599475197567934812
-    second: Armature|open
+      74: -4769244014585516771
+    second: Armature|gremlin_shoot
   externalObjects: {}
   materials:
     materialImportMode: 2

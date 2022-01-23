@@ -81,7 +81,7 @@ public class RoomObj : MonoBehaviour
         Vector3 offsetDir = new Vector3();
         offsetDir += Vector3.forward * (doorIndex == 0 || doorIndex == 1 ? 1 : -1);
         offsetDir += Vector3.right * (doorIndex == 1 || doorIndex == 2 ? 1 : -1);
-        newRoom.transform.position = transform.position + offsetDir.normalized * roomWidth * 2;
+        newRoom.transform.position = transform.position + offsetDir.normalized * roomWidth * 2 * 0.9f;
         Destroy(gameObject);
     }
 
