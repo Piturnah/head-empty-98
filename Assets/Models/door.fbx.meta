@@ -6,6 +6,18 @@ ModelImporter:
   - first:
       74: -1599475197567934812
     second: Armature|open
+  - first:
+      74: -3999578356269874737
+    second: Cube|CubeAction
+  - first:
+      74: -7918129362319027497
+    second: Cube|CubeAction.001
+  - first:
+      74: 17017395923089283
+    second: Cube.001|CubeAction
+  - first:
+      74: 7693504525942378453
+    second: Cube.001|CubeAction.001
   externalObjects: {}
   materials:
     materialImportMode: 2
