@@ -284,6 +284,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 11.9, y: 84.9, z: 0}
+--- !u!1 &1076457385 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d28a4b8fd55545642b426655d9da09aa, type: 3}
+  m_PrefabInstance: {fileID: 1719571310}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1205452257
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +513,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d28a4b8fd55545642b426655d9da09aa, type: 3}
   m_PrefabInstance: {fileID: 1719571310}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1270510514
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076457385}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e97476b6b5d39e544a738fd2c6c4b632, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1543340249
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d28a4b8fd55545642b426655d9da09aa, type: 3}
       propertyPath: m_Name
-      value: tanuki_animated
+      value: model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d28a4b8fd55545642b426655d9da09aa, type: 3}
