@@ -10,4 +10,6 @@ public class Assets : MonoBehaviour
     public GameObject roomPrefab;
     public GameObject[] roomObstacles;
     public RoomType[] roomTypes;
+    public GameObject monsterPrefab;
+    public Texture2D[] monsterColours;
 }
