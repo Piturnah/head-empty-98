@@ -27,6 +27,7 @@ public class Door : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("uwu");
             roomInfo.CompletedRoom();
         }
 
