@@ -41,6 +41,10 @@ public class PlayerManagement : MonoBehaviour
     void Move()
     {
         Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        if (frozen)
+        {
+            dir = Vector3.zero;
+        }
 
         if(dir != Vector3.zero)
         {
@@ -58,7 +62,7 @@ public class PlayerManagement : MonoBehaviour
             float lookAngle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
             model.eulerAngles = Vector3.up * (90 - lookAngle);
         }
-        else if (aiming)
+        else if (aiming && !frozen)
         {
             Vector3 lookDir = (target - Vector3.Scale(transform.position, (Vector3.one - Vector3.up))).normalized;
             float lookAngle = Mathf.Atan2(lookDir.z, lookDir.x) * Mathf.Rad2Deg;
