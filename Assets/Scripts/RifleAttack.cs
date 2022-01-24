@@ -15,7 +15,7 @@ public class RifleAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))    //DEBUG
         {
             Fire();
         }
@@ -23,6 +23,7 @@ public class RifleAttack : MonoBehaviour
 
     public static void Fire()
     {
+        AudioManager.Play("LaserRifleShot");
         ((GameObject)Instantiate(Resources.Load("Bullet"), 
             _instance.firingPoint.position, 
             Quaternion.LookRotation(_instance.transform.forward) * Quaternion.Euler(90,0,0))).GetComponent<BulletControl>().velocity = 
