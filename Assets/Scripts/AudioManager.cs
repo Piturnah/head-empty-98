@@ -25,10 +25,15 @@ public class AudioManager : MonoBehaviour
 
     public static void Play(string name)
     {
-        if (!Controller.levelIsOver)
+        if (!Controller.levelIsOver && !IsPlaying(name))
         {
             Array.Find(_instance.sounds, sound => sound.name == name).source.Play();
         }
+    }
+
+    public static bool IsPlaying(string name)
+    {
+        return Array.Find(_instance.sounds, sound => sound.name == name).source.isPlaying;
     }
 
     public static void Stop(string name)

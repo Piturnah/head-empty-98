@@ -559,7 +559,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6501d1e6f4279484c8426b02f33f24f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: Running
+    clip: {fileID: 8300000, guid: d697cbefc5155f24580ab4e1b3482cda, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserRifleShot
+    clip: {fileID: 8300000, guid: bba3cff316b862948839b81fde5c8727, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ChargeRifleShot
+    clip: {fileID: 8300000, guid: f55de456b1fbbd74fa9bdd463d1f8a49, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &1852906603
 Transform:
   m_ObjectHideFlags: 0

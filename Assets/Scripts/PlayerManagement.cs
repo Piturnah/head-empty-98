@@ -38,6 +38,15 @@ public class PlayerManagement : MonoBehaviour
     void Move()
     {
         Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        if(dir != Vector3.zero)
+        {
+            AudioManager.Play("Running");
+        }
+        else if (AudioManager.IsPlaying("Running"))
+        {
+            AudioManager.Stop("Running");
+        }
+
         if (!Input.GetKey(KeyCode.Mouse1) && !dir.Equals(Vector3.zero))
         {
             tanukiAnim.SetFloat("horizontal", dir.x);
