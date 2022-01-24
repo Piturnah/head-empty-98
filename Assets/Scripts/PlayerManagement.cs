@@ -10,6 +10,7 @@ public class PlayerManagement : MonoBehaviour
     bool aiming;
 
     public static Vector3 playerPositionLastFrame;
+    public static bool frozen = false;
 
     Rigidbody rb;
     Transform model;

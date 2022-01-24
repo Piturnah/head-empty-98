@@ -123,12 +123,21 @@ public class GremlinControl : MonoBehaviour
 
     private void HeadbuttAttack()
     {
-
+        //Play Headbutt animation
+        Collider[] hits = Physics.OverlapBox(transform.position, Vector3.one);
+        foreach(Collider collider in hits)
+        {
+            if (collider.CompareTag("Player"))
+            {
+                collider.GetComponent<PlayerManagement>().TakeDamage();
+            }
+        }
     }
 
     private void ExplosionAttack()
     {
-
+        Instantiate(Resources.Load("Explosion"), transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     private bool LineOfSightClear() 
