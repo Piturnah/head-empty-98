@@ -61,17 +61,18 @@ public class GremlinControl : MonoBehaviour
             //Dash towards player if possible
             if (LineOfSightClear())
             {
-                rb.velocity = vectorTowardsPlayer.normalized * speed;
-                transform.LookAt(PlayerManagement.playerPositionLastFrame,Vector3.up);
+                rb.velocity = vectorTowardsPlayer.normalized * speed;            
             }
             timeLeft = timeBetweenMovements;
+            FacePlayer();
         }
         else
         {
             timeLeft -= Time.deltaTime;
         }
 
-        if(vectorTowardsPlayer.sqrMagnitude < attackRange * attackRange && timeLeftTillAttack < 0)
+
+        if (vectorTowardsPlayer.sqrMagnitude < attackRange * attackRange && timeLeftTillAttack < 0)
         {
             if(gremlinType == GremlinTypes.Explosion)
             {
@@ -93,6 +94,11 @@ public class GremlinControl : MonoBehaviour
         }
     }
 
+    private void FacePlayer()
+    {
+        transform.LookAt(new Vector3(PlayerManagement.playerPositionLastFrame.x, transform.position.y, PlayerManagement.playerPositionLastFrame.z), Vector3.up);
+    }
+
     private void FixedUpdate()
     {
         if(rb.velocity.sqrMagnitude > speed/100f && vectorTowardsPlayer.sqrMagnitude > stopLimit * stopLimit)
@@ -102,6 +108,10 @@ public class GremlinControl : MonoBehaviour
         else
         {
             rb.velocity = Vector3.zero;
+            if (gremlinType == GremlinTypes.Freeze)
+            {
+                FacePlayer();
+            }
         }
 
     }
