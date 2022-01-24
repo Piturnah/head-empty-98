@@ -66,10 +66,10 @@ public class GremlinControl : MonoBehaviour
             //Dash towards player if possible
             if (LineOfSightClear())
             {
-                rb.velocity = velocity;            
+                rb.velocity = velocity;
+                FacePlayer();
             }
             timeLeft = timeBetweenMovements;
-            FacePlayer();
         }
         else
         {
@@ -98,7 +98,7 @@ public class GremlinControl : MonoBehaviour
             timeLeftTillAttack -= Time.deltaTime;
         }
 
-        anim.SetFloat("velocity", velocity.magnitude);
+        anim.SetFloat("velocity", rb.velocity.magnitude);
     }
 
     private void FacePlayer()
@@ -108,11 +108,7 @@ public class GremlinControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(rb.velocity.sqrMagnitude > speed/100f && vectorTowardsPlayer.sqrMagnitude > stopLimit * stopLimit)
-        {
-            rb.velocity -= Vector3.one * gremlinDrag;
-        }
-        else
+        if(vectorTowardsPlayer.sqrMagnitude <= stopLimit * stopLimit)
         {
             rb.velocity = Vector3.zero;
             if (gremlinType == GremlinTypes.Freeze)
