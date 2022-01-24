@@ -25,11 +25,6 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            roomInfo.CompletedRoom();
-        }
-
         if (roomInfo.completed)
         {
             if (Time.time - instantiatedTime >= timeTilDoorsOpen)

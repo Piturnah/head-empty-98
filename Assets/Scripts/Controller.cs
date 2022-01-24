@@ -8,7 +8,7 @@ public class Controller : MonoBehaviour
 {
     Assets assets;
  
-    // seed: [fromDoorIndex, parentSeed]
+    // seed: [fromDoorIndex, parentSeed, index]
     static Dictionary<int, int[]> rooms = new Dictionary<int, int[]>();
     static Dictionary<int, bool> roomComplete = new Dictionary<int, bool>();
 
@@ -34,7 +34,7 @@ public class Controller : MonoBehaviour
 
     public static void VisitedRoom(int newRoomSeed, int fromDoor, int parentSeed)
     {
-        rooms[newRoomSeed] = new int[] { (fromDoor + 2) % 4, parentSeed };
+        rooms[newRoomSeed] = new int[] { (fromDoor + 2) % 4, parentSeed, rooms.Count() };
     }
 
     public static void CompleteRoom(int seed)

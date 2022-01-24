@@ -61,7 +61,8 @@ public class RoomObj : MonoBehaviour
 
     const float roomWidth = 20.58705f;
     const int maxRoomObstacles = 6;
-    const int maxRoomMonsters = 6;
+
+    Transform monstersParent;
 
     private void Start()
     {
@@ -90,6 +91,7 @@ public class RoomObj : MonoBehaviour
     public void setRoomObj(Room room)
     {
         assets = FindObjectOfType<Assets>();
+        monstersParent = transform.Find("monsters");
         this.room = room;
 
         foreach (Transform wall in transform.Find("Walls").transform)
@@ -111,21 +113,43 @@ public class RoomObj : MonoBehaviour
             GameObject newObstacle = Instantiate(assets.roomObstacles[room.rand.Next() % assets.roomObstacles.Length], attemptPos, Quaternion.Euler(Vector3.up * 45), transform);
         }
 
-        max = room.rand.Next(0, maxRoomMonsters);
-        for (int i = 0; i < max; i++)
+        if (!Controller.IsRoomComplete(room.seed))
         {
-            Vector3 offsetDir = new Vector3((float)(room.rand.NextDouble() - .5f) * 2, 0, (float)(room.rand.NextDouble() - .5f) * 2).normalized;
-            Vector3 attemptPos = transform.position + offsetDir * (float)room.rand.NextDouble() * roomWidth;
-            while (Physics.CheckSphere(attemptPos, .8f))
+            max = room.rand.Next(0, MaxRoomMonsters());
+            for (int i = 0; i < max; i++)
             {
-                attemptPos = transform.position + offsetDir * (float)room.rand.NextDouble() * roomWidth;
+                Vector3 offsetDir = new Vector3((float)(room.rand.NextDouble() - .5f) * 2, 0, (float)(room.rand.NextDouble() - .5f) * 2).normalized;
+                Vector3 attemptPos = transform.position + offsetDir * (float)room.rand.NextDouble() * roomWidth;
+                while (Physics.CheckSphere(attemptPos, .8f))
+                {
+                    attemptPos = transform.position + offsetDir * (float)room.rand.NextDouble() * roomWidth;
+                }
+                GameObject newMonster = Instantiate(assets.monsterPrefab, attemptPos, Quaternion.Euler(Vector3.up * 45), monstersParent);
+                int typeIndex = room.rand.Next() % assets.monsterColours.Length;
+                newMonster.GetComponent<GremlinControl>().gremlinType = (GremlinControl.GremlinTypes)typeIndex;
+                newMonster.transform.Find("model").Find("Cylinder").GetComponent<SkinnedMeshRenderer>().material.mainTexture = assets.monsterColours[typeIndex];
             }
-            GameObject newMonster = Instantiate(assets.monsterPrefab, attemptPos, Quaternion.Euler(Vector3.up * 45), transform);
-            int typeIndex = room.rand.Next() % assets.monsterColours.Length;
-            newMonster.GetComponent<GremlinControl>().gremlinType = (GremlinControl.GremlinTypes)typeIndex;
-            newMonster.transform.Find("model").Find("Cylinder").GetComponent<SkinnedMeshRenderer>().material.mainTexture = assets.monsterColours[typeIndex];
+
+            if (monstersParent.childCount == 0)
+            {
+                room.CompletedRoom();
+            }
         }
     }
+
+    public void OnMonsterDeath()
+    {
+        if (monstersParent.childCount == 1)
+        {
+            room.CompletedRoom();
+        }
+    }
+
+    int MaxRoomMonsters()
+    {
+        return 1 + Mathf.FloorToInt(3 * Mathf.Log(room.fromRoomInfo[2] + 1));
+    }
+
     public Room getRoom()
     {
         return room;
