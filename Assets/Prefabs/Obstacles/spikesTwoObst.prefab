@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5311134734115512899}
   - component: {fileID: 7948861791702963849}
   - component: {fileID: 8453533437675894621}
+  - component: {fileID: -2684492952982064276}
   m_Layer: 0
   m_Name: spikesTwoObst
   m_TagString: Untagged
@@ -97,3 +98,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.9035504, y: 1.1071903, z: 3.9035504}
   m_Center: {x: 0, y: 0.5644, z: 0}
+--- !u!114 &-2684492952982064276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453533437675894620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0441a847c633e0f4fb9451458f527c53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

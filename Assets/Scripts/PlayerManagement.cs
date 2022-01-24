@@ -11,11 +11,15 @@ public class PlayerManagement : MonoBehaviour
     int movementSpeed;
     Animator tanukiAnim;
 
+    public int maxHealth = 3;
+    int currentHealth;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         model = transform.Find("models");
         tanukiAnim = model.Find("model").GetComponent<Animator>();
+        currentHealth = maxHealth;
     }
 
     void Move()
@@ -31,6 +35,11 @@ public class PlayerManagement : MonoBehaviour
         rb.velocity = dir * movementSpeed;
     }
 
+    public void TakeDamage()
+    {
+        currentHealth -= 1;
+    }
+
     private void FixedUpdate()
     {
         Move();
@@ -41,5 +50,9 @@ public class PlayerManagement : MonoBehaviour
         movementSpeed = (Input.GetKey(KeyCode.Mouse1) ? aimSpeed : runSpeed);
         tanukiAnim.SetFloat("velocity", rb.velocity.magnitude);
         tanukiAnim.SetBool("aiming", Input.GetKey(KeyCode.Mouse1));
+        if(currentHealth <= 0)
+        {
+            Controller.GameLost();
+        }
     }
 }
