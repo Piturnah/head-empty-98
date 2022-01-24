@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 974549116654297689}
   - component: {fileID: 3054210256772617875}
   - component: {fileID: 974549116654297694}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: fleshPillarObst 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

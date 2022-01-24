@@ -7,6 +7,7 @@ public class PlayerManagement : MonoBehaviour
     Rigidbody rb;
     Transform model;
     public int movementSpeed;
+    public static Vector3 playerPositionLastFrame;
     Animator anim;
 
     public int maxHealth = 3;
@@ -56,5 +57,6 @@ public class PlayerManagement : MonoBehaviour
         {
             Controller.GameLost();
         }
+        playerPositionLastFrame = transform.position;
     }
 }

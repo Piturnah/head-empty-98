@@ -121,7 +121,9 @@ public class RoomObj : MonoBehaviour
                 attemptPos = transform.position + offsetDir * (float)room.rand.NextDouble() * roomWidth;
             }
             GameObject newMonster = Instantiate(assets.monsterPrefab, attemptPos, Quaternion.Euler(Vector3.up * 45), transform);
-            newMonster.transform.Find("model").Find("Cylinder").GetComponent<SkinnedMeshRenderer>().material.mainTexture = assets.monsterColours[room.rand.Next() % assets.monsterColours.Length];
+            int typeIndex = room.rand.Next() % assets.monsterColours.Length;
+            newMonster.GetComponent<GremlinControl>().gremlinType = (GremlinControl.GremlinTypes)typeIndex;
+            newMonster.transform.Find("model").Find("Cylinder").GetComponent<SkinnedMeshRenderer>().material.mainTexture = assets.monsterColours[typeIndex];
         }
     }
     public Room getRoom()
