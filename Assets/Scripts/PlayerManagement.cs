@@ -41,6 +41,7 @@ public class PlayerManagement : MonoBehaviour
     void Move()
     {
         Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+
         if(dir != Vector3.zero)
         {
             AudioManager.Play("Running");
@@ -50,14 +51,14 @@ public class PlayerManagement : MonoBehaviour
             AudioManager.Stop("Running");
         }
 
-        if (!Input.GetKey(KeyCode.Mouse1) && !dir.Equals(Vector3.zero))
+        if (!aiming && !dir.Equals(Vector3.zero))
         {
             tanukiAnim.SetFloat("horizontal", dir.x);
             tanukiAnim.SetFloat("vertical", dir.z);
             float lookAngle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
             model.eulerAngles = Vector3.up * (90 - lookAngle);
         }
-        else
+        else if (aiming)
         {
             Vector3 lookDir = (target - Vector3.Scale(transform.position, (Vector3.one - Vector3.up))).normalized;
             float lookAngle = Mathf.Atan2(lookDir.z, lookDir.x) * Mathf.Rad2Deg;
