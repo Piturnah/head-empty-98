@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GremlinControl : MonoBehaviour
 {
+    event Action onDeath;
+
     //Base Gremlin Control
     public float health = 3f;
     public enum GremlinTypes
@@ -29,6 +32,8 @@ public class GremlinControl : MonoBehaviour
 
     private void Start()
     {
+        onDeath += transform.parent.parent.GetComponent<RoomObj>().OnMonsterDeath;
+
         anim = transform.Find("model").GetComponent<Animator>();
 
         rb = GetComponent<Rigidbody>();
@@ -164,6 +169,8 @@ public class GremlinControl : MonoBehaviour
 
     private void Die()
     {
+        onDeath?.Invoke();
+        onDeath -= transform.parent.parent.GetComponent<RoomObj>().OnMonsterDeath;
         ThoughtsManagment.CreateThought();
         Destroy(gameObject);
     }
