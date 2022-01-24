@@ -10,6 +10,7 @@ public class SnowballControl : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GetComponent<MeshRenderer>().enabled = false;
             StartCoroutine("frozenControl");
         }
     }
@@ -19,5 +20,6 @@ public class SnowballControl : MonoBehaviour
         PlayerManagement.frozen = true;
         yield return new WaitForSecondsRealtime(timeToWait);
         PlayerManagement.frozen = false;
+        Destroy(gameObject);
     }
 }

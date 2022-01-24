@@ -121,7 +121,7 @@ public class GremlinControl : MonoBehaviour
 
     private void FreezeAttack()
     {
-
+        ((GameObject)Instantiate(Resources.Load("Snowball"), transform.position + Vector3.up, Quaternion.identity)).GetComponent<BulletControl>().velocity = transform.forward * 20f;
     }
 
     private void HeadbuttAttack()
