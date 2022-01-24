@@ -9,19 +9,15 @@ public class PlayerManagement : MonoBehaviour
 
     bool aiming;
 
+    public static Vector3 playerPositionLastFrame;
+
     Rigidbody rb;
     Transform model;
-<<<<<<< HEAD
-    public int movementSpeed;
-    public static Vector3 playerPositionLastFrame;
-    Animator anim;
-=======
     int runSpeed = 12;
     int aimSpeed = 9;
     int movementSpeed;
     Animator tanukiAnim;
     Animator backpackAnim;
->>>>>>> 611dfdfe89977e3f3045cc719497e1ccdf2efe9a
 
     public int maxHealth = 3;
     int currentHealth;
@@ -94,10 +90,7 @@ public class PlayerManagement : MonoBehaviour
         if(currentHealth <= 0)
         {
             Controller.GameLost();
-        }
-<<<<<<< HEAD
-        playerPositionLastFrame = transform.position;
-=======
+        }      
 
         if (Input.GetKey(KeyCode.Mouse1))
         {
@@ -110,6 +103,7 @@ public class PlayerManagement : MonoBehaviour
                 target = Vector3.Scale(ray.GetPoint(dist), (Vector3.one - Vector3.up));
             }
         }
->>>>>>> 611dfdfe89977e3f3045cc719497e1ccdf2efe9a
+
+        playerPositionLastFrame = transform.position;
     }
 }
