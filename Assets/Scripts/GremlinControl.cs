@@ -150,4 +150,17 @@ public class GremlinControl : MonoBehaviour
             Quaternion.LookRotation(PlayerManagement.playerPositionLastFrame));
         return hits.Length == 0;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
 }
