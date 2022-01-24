@@ -156,7 +156,7 @@ public class GremlinControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullet"))
+        if (other.CompareTag("Player"))
         {
             Die();
         }
@@ -164,6 +164,7 @@ public class GremlinControl : MonoBehaviour
 
     private void Die()
     {
+        ThoughtsManagment.CreateThought();
         Destroy(gameObject);
     }
 }
