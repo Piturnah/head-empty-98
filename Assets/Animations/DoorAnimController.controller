@@ -22,7 +22,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -1599475197567934812, guid: 137fc4ebedf6a264d9f96d252cd49c95, type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: reverse
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -35,6 +35,18 @@ AnimatorController:
   m_Name: DoorAnimController
   serializedVersion: 5
   m_AnimatorParameters:
+  - m_Name: reverse
+    m_Type: 1
+    m_DefaultFloat: -1
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: rifle
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: open
     m_Type: 9
     m_DefaultFloat: 0
@@ -68,7 +80,7 @@ AnimatorStateMachine:
     m_Position: {x: 280, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2833427234402113039}
-    m_Position: {x: 460, y: -40, z: 0}
+    m_Position: {x: 600, y: -50, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

@@ -8,7 +8,6 @@ public class PlayerManagement : MonoBehaviour
     Vector3 relativeCameraPos;
 
     bool aiming;
-    bool aimingPrevFrame;
 
     Rigidbody rb;
     Transform model;
@@ -16,6 +15,7 @@ public class PlayerManagement : MonoBehaviour
     int aimSpeed = 9;
     int movementSpeed;
     Animator tanukiAnim;
+    Animator backpackAnim;
 
     public int maxHealth = 3;
     int currentHealth;
@@ -30,26 +30,32 @@ public class PlayerManagement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         model = transform.Find("models");
         tanukiAnim = model.Find("model").GetComponent<Animator>();
+        backpackAnim = model.Find("backpack").GetComponent<Animator>();
+
         currentHealth = maxHealth;
     }
 
     void Move()
     {
         Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        tanukiAnim.SetFloat("horizontal", dir.x);
-        tanukiAnim.SetFloat("vertical", dir.z);
-        if (!Input.GetKey(KeyCode.Mouse1))
+        if (!Input.GetKey(KeyCode.Mouse1) && !dir.Equals(Vector3.zero))
         {
+            tanukiAnim.SetFloat("horizontal", dir.x);
+            tanukiAnim.SetFloat("vertical", dir.z);
             float lookAngle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
             model.eulerAngles = Vector3.up * (90 - lookAngle);
-            rb.velocity = dir * movementSpeed;
-        } else
+        }
+        else
         {
             Vector3 lookDir = (target - Vector3.Scale(transform.position, (Vector3.one - Vector3.up))).normalized;
-            float lookAngle = Mathf.Atan2(lookDir.z, lookDir.x) * Mathf.Rad2Deg;     
+            float lookAngle = Mathf.Atan2(lookDir.z, lookDir.x) * Mathf.Rad2Deg;
+            float angleDiff = Vector3.SignedAngle(lookDir, dir, Vector3.up);
+            Vector3 relativeVector = Quaternion.AngleAxis(angleDiff, Vector3.up) * Vector3.forward;
+            tanukiAnim.SetFloat("horizontal", relativeVector.x);
+            tanukiAnim.SetFloat("vertical", relativeVector.z);
             model.eulerAngles = Vector3.up * (90 - lookAngle);
-            rb.velocity = (model.transform.forward * dir.z + model.transform.right * dir.x) * movementSpeed;
         }
+        rb.velocity = dir * movementSpeed;
     }
 
     public void TakeDamage()
@@ -64,21 +70,8 @@ public class PlayerManagement : MonoBehaviour
 
     private void Update()
     {
-        aimingPrevFrame = aiming;
         aiming = Input.GetKey(KeyCode.Mouse1);
-
-        if (aimingPrevFrame != aiming)
-        {
-            if (aiming)
-            {
-                mainCamera.transform.parent = null;
-            }
-            else
-            {
-                mainCamera.transform.parent = transform;
-                mainCamera.transform.localPosition = relativeCameraPos;
-            }
-        }
+        backpackAnim.SetBool("rifle", aiming);
 
         movementSpeed = (aiming ? aimSpeed : runSpeed);
         tanukiAnim.SetFloat("velocity", rb.velocity.magnitude);
