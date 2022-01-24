@@ -25,8 +25,12 @@ public class GremlinControl : MonoBehaviour
     private float timeLeftTillAttack;
     Rigidbody rb;
 
+    Animator anim;
+
     private void Start()
     {
+        anim = transform.Find("model").GetComponent<Animator>();
+
         rb = GetComponent<Rigidbody>();
         timeLeft = timeBetweenMovements;
         if (gremlinType == GremlinTypes.Explosion)
@@ -56,12 +60,13 @@ public class GremlinControl : MonoBehaviour
     private void Update()
     {
         vectorTowardsPlayer = PlayerManagement.playerPositionLastFrame - transform.position;
-        if(timeLeft < 0)
+        Vector3 velocity = vectorTowardsPlayer.normalized * speed;
+        if (timeLeft < 0)
         {
             //Dash towards player if possible
             if (LineOfSightClear())
             {
-                rb.velocity = vectorTowardsPlayer.normalized * speed;            
+                rb.velocity = velocity;            
             }
             timeLeft = timeBetweenMovements;
             FacePlayer();
@@ -92,6 +97,8 @@ public class GremlinControl : MonoBehaviour
         {
             timeLeftTillAttack -= Time.deltaTime;
         }
+
+        anim.SetFloat("velocity", velocity.magnitude);
     }
 
     private void FacePlayer()
