@@ -110,6 +110,11 @@ public class PlayerManagement : MonoBehaviour
             }
         }
 
+        if (aiming && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            RifleAttack.Fire();
+        }
+
         playerPositionLastFrame = transform.position;
     }
 }

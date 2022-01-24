@@ -15,7 +15,6 @@ public class RifleAttack : MonoBehaviour
 
     public static void Fire()
     {
-        AudioManager.Play("LaserRifleShot");
         ((GameObject)Instantiate(Resources.Load("Bullet"), 
             _instance.firingPoint.position, 
             Quaternion.LookRotation(_instance.firingPoint.forward) * Quaternion.Euler(90,0,0))).GetComponent<BulletControl>().velocity = 
