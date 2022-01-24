@@ -148,7 +148,7 @@ public class GremlinControl : MonoBehaviour
     private void ExplosionAttack()
     {
         Instantiate(Resources.Load("Explosion"), transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        Die();
     }
 
     private bool LineOfSightClear() 
