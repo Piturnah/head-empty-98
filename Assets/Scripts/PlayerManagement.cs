@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerManagement : MonoBehaviour
 {
+    Camera mainCamera;
+    Vector3 relativeCameraPos;
+
+    bool aiming;
+    bool aimingPrevFrame;
+
     Rigidbody rb;
     Transform model;
     int runSpeed = 12;
@@ -14,8 +20,13 @@ public class PlayerManagement : MonoBehaviour
     public int maxHealth = 3;
     int currentHealth;
 
+    Vector3 target;
+
     private void Start()
     {
+        mainCamera = Camera.main;
+        relativeCameraPos = mainCamera.transform.localPosition;
+
         rb = GetComponent<Rigidbody>();
         model = transform.Find("models");
         tanukiAnim = model.Find("model").GetComponent<Animator>();
@@ -31,8 +42,14 @@ public class PlayerManagement : MonoBehaviour
         {
             float lookAngle = Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
             model.eulerAngles = Vector3.up * (90 - lookAngle);
+            rb.velocity = dir * movementSpeed;
+        } else
+        {
+            Vector3 lookDir = (target - Vector3.Scale(transform.position, (Vector3.one - Vector3.up))).normalized;
+            float lookAngle = Mathf.Atan2(lookDir.z, lookDir.x) * Mathf.Rad2Deg;     
+            model.eulerAngles = Vector3.up * (90 - lookAngle);
+            rb.velocity = (model.transform.forward * dir.z + model.transform.right * dir.x) * movementSpeed;
         }
-        rb.velocity = dir * movementSpeed;
     }
 
     public void TakeDamage()
@@ -47,12 +64,40 @@ public class PlayerManagement : MonoBehaviour
 
     private void Update()
     {
-        movementSpeed = (Input.GetKey(KeyCode.Mouse1) ? aimSpeed : runSpeed);
+        aimingPrevFrame = aiming;
+        aiming = Input.GetKey(KeyCode.Mouse1);
+
+        if (aimingPrevFrame != aiming)
+        {
+            if (aiming)
+            {
+                mainCamera.transform.parent = null;
+            }
+            else
+            {
+                mainCamera.transform.parent = transform;
+                mainCamera.transform.localPosition = relativeCameraPos;
+            }
+        }
+
+        movementSpeed = (aiming ? aimSpeed : runSpeed);
         tanukiAnim.SetFloat("velocity", rb.velocity.magnitude);
-        tanukiAnim.SetBool("aiming", Input.GetKey(KeyCode.Mouse1));
+        tanukiAnim.SetBool("aiming", aiming);
         if(currentHealth <= 0)
         {
             Controller.GameLost();
+        }
+
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            Plane floorPlane = new Plane(Vector3.up, 0);
+
+            float dist;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (floorPlane.Raycast(ray, out dist))
+            {
+                target = Vector3.Scale(ray.GetPoint(dist), (Vector3.one - Vector3.up));
+            }
         }
     }
 }
