@@ -39,6 +39,7 @@ public class GremlinControl : MonoBehaviour
             stopLimit = 2f;
             attackRange = 2f;
             timeBetweenAttacks = 0f;
+            anim.SetInteger("type",2);
         }
         else if (gremlinType == GremlinTypes.Headbutt)
         {
@@ -46,6 +47,7 @@ public class GremlinControl : MonoBehaviour
             stopLimit = 2f;
             attackRange = 2f;
             timeBetweenAttacks = 1f;
+            anim.SetInteger("type", 1);
         }
         else if (gremlinType == GremlinTypes.Freeze)
         {
@@ -53,6 +55,7 @@ public class GremlinControl : MonoBehaviour
             stopLimit = 10f;
             attackRange = 15f;
             timeBetweenAttacks = 5f;
+            anim.SetInteger("type", 0);
         }
         timeLeftTillAttack = timeBetweenAttacks;
     }
