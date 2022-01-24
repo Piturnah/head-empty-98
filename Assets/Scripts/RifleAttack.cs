@@ -13,21 +13,13 @@ public class RifleAttack : MonoBehaviour
         _instance = this;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))    //DEBUG
-        {
-            Fire();
-        }
-    }
-
     public static void Fire()
     {
         AudioManager.Play("LaserRifleShot");
         ((GameObject)Instantiate(Resources.Load("Bullet"), 
             _instance.firingPoint.position, 
-            Quaternion.LookRotation(_instance.transform.forward) * Quaternion.Euler(90,0,0))).GetComponent<BulletControl>().velocity = 
-            _instance.transform.forward * _instance.bulletSpeed;
+            Quaternion.LookRotation(_instance.firingPoint.forward) * Quaternion.Euler(90,0,0))).GetComponent<BulletControl>().velocity = 
+            _instance.firingPoint.forward * _instance.bulletSpeed;
     }
 
     private void OnDrawGizmos()
